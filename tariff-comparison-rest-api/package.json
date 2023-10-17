@@ -1,0 +1,13 @@
+{
+    "name": "tariff_comparison_rest_api",
+    "version": "1.0.0",
+    "description": "Node.js express API for tariff comparison app",
+    "author": "Gordon von Graevenitz <wg.vg95@gmail.com>",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2"
+    }
+  }
