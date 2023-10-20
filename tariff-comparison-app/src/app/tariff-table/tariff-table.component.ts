@@ -21,6 +21,7 @@ export class TariffTableComponent implements OnInit, AfterViewInit{
 
   ngOnInit(): void {
     this.dataSource = new TariffTableDataSource(this.tariffItems);
+    this.changeDetectorRefs.detectChanges();
   }
 
   displayedColumns = ['name', 'annualCost'];
@@ -29,6 +30,5 @@ export class TariffTableComponent implements OnInit, AfterViewInit{
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
     this.table.dataSource = this.dataSource;
-    this.changeDetectorRefs.detectChanges();
   }
 }

@@ -20,15 +20,13 @@ export class ConsumptionFormComponent implements OnDestroy {
   private fb = inject(FormBuilder);
   consumptionForm = this.fb.group({
     consumption: [null, Validators.required],
-    lastName: [null, Validators.required],
-    address: [null, Validators.required],
   });
 
   onSubmit(): void {
+    this.tariffItems.emit(null);
     this.tariffApiService.getAnnualCosts(this.consumptionForm.controls.consumption.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message::::', data);
       if (data){
-        this.showTable = true;
         this.tariffItems.emit(data);
       }
       else
