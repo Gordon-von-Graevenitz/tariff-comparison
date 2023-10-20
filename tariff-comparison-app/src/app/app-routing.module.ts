@@ -4,8 +4,8 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const routes: Routes = [
+  { path: '', component:  LandingPageComponent },
   { path: 'search', component: LandingPageComponent },
-  { path: '', component: LandingPageComponent },
   { path: 'addProduct', component: AddProductComponent },
 ];
 
