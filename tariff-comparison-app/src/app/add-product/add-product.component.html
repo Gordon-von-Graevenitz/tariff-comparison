@@ -1,4 +1,4 @@
-<form [formGroup]="productForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="productForm" (ngSubmit)="onSubmit()">
   <mat-card class="product-card">
     <mat-card-header>
       <mat-card-title>Add New Product</mat-card-title>
@@ -17,7 +17,8 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Base Cost" formControlName="baseCost">
+            <input type="number" matInput placeholder="Base Cost" formControlName="baseCost">
+            <span matTextPrefix>&euro; &nbsp;</span>
             <mat-error *ngIf="productForm.controls['baseCost'].hasError('required')">
               Base Cost is <strong>required</strong>
             </mat-error>
@@ -26,16 +27,18 @@
 
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Additional Cost" formControlName="additionalCost">
-            <mat-error *ngIf="productForm.controls['additionalCost'].hasError('required')">
-              Additional Cost is <strong>required</strong>
+            <input type="number" matInput placeholder="Additional Kwh Cost" formControlName="additionalKwhCost">
+            <span matTextSuffix>cents &nbsp;</span>
+            <mat-error *ngIf="productForm.controls['additionalKwhCost'].hasError('required')">
+              Additional Kwh Cost is <strong>required</strong>
             </mat-error>
           </mat-form-field>
         </div>
         
         
         <div class="col">
-          <mat-form-field class="full-width">
+          <mat-form-field floatLabel="always" class="full-width">
+            <mat-label>Product Type</mat-label>
             <mat-select placeholder="Type" formControlName="type">
               <mat-option *ngFor="let type of types" [value]="type">
                 {{ type }}
@@ -51,14 +54,14 @@
          <div class="row" *ngIf="productForm.controls['type'].value == 2">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Included KWH" formControlName="includedKwh">
+            <input type="number" matInput placeholder="Included KWH" formControlName="includedKwh">
           </mat-form-field>
         </div>
       </div>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" [disabled]="productForm.invalid" type="submit">Submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

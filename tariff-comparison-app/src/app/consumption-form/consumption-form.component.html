@@ -1,20 +1,21 @@
-<form [formGroup]="consumptionForm" novalidate (ngSubmit)="onSubmit()">
+<form [formGroup]="consumptionForm" (ngSubmit)="onSubmit()">
   <mat-card class="shipping-card">
     <mat-card-header>
-      <mat-card-title>Search</mat-card-title>
+      <mat-card-title>Compare Annual Costs by Consumption</mat-card-title>
     </mat-card-header>
     <mat-card-content>
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Consumption in KWH" formControlName="consumption">
+            <input matInput placeholder="Consumption in Kwh" formControlName="consumption">
+            <span matTextSuffix>Kwh &nbsp;</span>
           </mat-form-field>
         </div>
       </div>
 
     </mat-card-content>
     <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Submit</button>
+      <button mat-raised-button color="primary" [disabled]="consumptionForm.invalid" type="submit">Submit</button>
     </mat-card-actions>
   </mat-card>
 </form>

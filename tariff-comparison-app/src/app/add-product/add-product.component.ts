@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { TariffApiServiceService } from '../services/tariff-api-service.service';
+import { Subject, takeUntil } from 'rxjs';
 
 
 @Component({
@@ -10,10 +12,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class AddProductComponent {
   private fb = inject(FormBuilder);
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
   productForm = this.fb.group({
     name: [null, Validators.required],
     baseCost: [null, Validators.required],
-    additionalCost: [null, Validators.required],
+    additionalKwhCost: [null, Validators.required],
+    includedKwh: [null],
     type: [null, Validators.required],
   });
 
@@ -21,7 +26,19 @@ export class AddProductComponent {
 
   types = [1, 2 ];
 
+  constructor(private tariffApiService: TariffApiServiceService){}
+
   onSubmit(): void {
-    alert('Thanks!');
+    this.tariffApiService.addTariffProduct(this.productForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
+      console.log('message::::', data);
+      if (data)
+      alert('Added new Product!');
+    });
+  }
+
+  
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
   }
 }
