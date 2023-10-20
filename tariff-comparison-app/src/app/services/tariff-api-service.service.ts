@@ -16,7 +16,7 @@ export class TariffApiServiceService {
   }
 
   getAnnualCosts(consumption: any) {
-    return this.httpservice.get(this.rootURL + `/annualcosts/${consumption}`);
+    return this.httpservice.get(this.rootURL + `/tariffs/${consumption}`);
   }
 
   addTariffProduct(tariff: any) {

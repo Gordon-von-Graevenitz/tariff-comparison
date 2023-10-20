@@ -7,8 +7,7 @@ const PORT = process.env.PORT || 8080;
 const HOST = '0.0.0.0';
  
 const app = express(),
-      bodyParser = require("body-parser"),
-      querystring = require('querystring');
+      bodyParser = require("body-parser");
 
 const tariffs = [
         {"name": "Product A", "type":1, "baseCost": 5, "additionalKwhCost":22},
@@ -29,28 +28,40 @@ app.get('/api/tariffs', (req, res) => {
   res.send(tariffs);
 });
 
-app.get('/api/annualcosts/:consumption', (req, res) => {
-  const userConsumption = parseFloat(req.params.consumption);
-  const calculatedTariffs = []
-  tariffs.forEach(element => {
-      switch (element.type) {
-        case 1:
-          calculatedTariffs.push({"name": element.name, "annualCost": calculateType1Tariff(userConsumption, element)})
-          break;
-        case 2:
-          calculatedTariffs.push({"name": element.name, "annualCost": calculateType2Tariff(userConsumption, element)})
-          break;
-        default:
-          break;
-      }
-  });
-  res.send(calculatedTariffs);
+app.get('/api/tariffs/:consumption', (req, res) => {
+  try {
+    const userConsumption = parseFloat(req.params.consumption);
+    const calculatedTariffs = []
+  
+    tariffs.forEach(element => {
+        switch (element.type) {
+          case 1:
+            calculatedTariffs.push({"name": element.name, "annualCost": calculateType1Tariff(userConsumption, element)})
+            break;
+          case 2:
+            calculatedTariffs.push({"name": element.name, "annualCost": calculateType2Tariff(userConsumption, element)})
+            break;
+          default:
+            break;
+        }
+    });
+    res.status(200).json(calculatedTariffs)
+  }
+  catch (error) {
+    res.status(500).json({message: error.message})
+  }
+  
 });
 
 app.post('/api/tariffs/addproduct', (req, res) => {
   const tariffItem = req.body.tariff;
-  tariffs.push(tariffItem);
-  res.send(tariffs);
+  try {
+    tariffs.push(tariffItem);
+    res.status(200).json(tariffs)
+  }
+  catch (error) {
+    res.status(500).json({message: error.message})
+  }
 });
  
 app.listen(PORT, HOST, () => {
