@@ -22,13 +22,15 @@ import { MatCardModule } from '@angular/material/card';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TariffApiServiceService } from './services/tariff-api-service.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AddProductComponent } from './add-product/add-product.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
     TariffTableComponent,
-    ConsumptionFormComponent
+    ConsumptionFormComponent,
+    AddProductComponent
   ],
   imports: [
     BrowserModule,

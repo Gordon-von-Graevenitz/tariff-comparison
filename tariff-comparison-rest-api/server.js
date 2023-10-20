@@ -46,6 +46,14 @@ app.get('/api/annualcosts/:consumption', (req, res) => {
   });
   res.send(calculatedTariffs);
 });
+
+app.post('/api/tariffs/addproduct', (req, res) => {
+  const oldcount = tariffs.length;
+  const tariffItem = req.body;
+  tariffs.push(tariffItem);
+  const newcount = tariffs.length;
+  res.send(`Old count: ${oldcount}, New count: ${newcount}`);
+});
  
 app.listen(PORT, HOST, () => {
   console.log(`Running on http://${HOST}:${PORT}`);
