@@ -17,7 +17,7 @@
       <div class="row">
         <div class="col">
           <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Base Cost" formControlName="baseCost">
+            <input type="number" matInput placeholder="Base Cost" formControlName="baseCost" id="baseCost">
             <span matTextPrefix>&euro; &nbsp;</span>
             <mat-error *ngIf="productForm.controls['baseCost'].hasError('required')">
               Base Cost is <strong>required</strong>
@@ -27,7 +27,7 @@
 
         <div class="col">
           <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Additional Kwh Cost" formControlName="additionalKwhCost">
+            <input type="number" matInput placeholder="Additional Kwh Cost" formControlName="additionalKwhCost" id="additionalKwhCost">
             <span matTextSuffix>cents &nbsp;</span>
             <mat-error *ngIf="productForm.controls['additionalKwhCost'].hasError('required')">
               Additional Kwh Cost is <strong>required</strong>
@@ -54,7 +54,7 @@
          <div class="row" *ngIf="productForm.controls['type'].value == 2">
         <div class="col">
           <mat-form-field class="full-width">
-            <input type="number" matInput placeholder="Included KWH" formControlName="includedKwh">
+            <input type="number" matInput placeholder="Included KWH" formControlName="includedKwh" id="type">
           </mat-form-field>
         </div>
       </div>
